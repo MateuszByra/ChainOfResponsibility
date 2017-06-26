@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Family.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,16 @@ namespace ConsoleFamily
 {
     public class FamilyMember
     {
-        private readonly IEnumerable<object> parts;
+        private readonly ChainElement components;
 
-        public FamilyMember(IEnumerable<object> parts)
+        public FamilyMember(ChainElement components)
         {
-            this.parts = new List<object>(parts);
+            this.components = components;
         }
 
-        public T As<T>()
+        public T As<T>(T defaultValue) where T : class
         {
-            foreach (object obj in this.parts)
-                if (obj is T)
-                    return (T)obj;
-            return default(T);
+            return this.components.As<T>(defaultValue);
         }
     }
 }

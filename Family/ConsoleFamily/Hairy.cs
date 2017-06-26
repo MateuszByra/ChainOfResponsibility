@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleFamily
 {
-    public class Hairy : IHairy
+    public class Hairy : ChainElement, IHairy
     {
         private readonly string owner;
+
+        public Hairy(string owner, ChainElement next)
+        {
+            this.owner = owner;
+        }
 
         public Hairy(string owner)
         {
