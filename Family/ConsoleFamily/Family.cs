@@ -9,20 +9,25 @@ namespace ConsoleFamily
 {
     public class Family
     {
-        private IEnumerable<object> members;
+        private IEnumerable<FamilyMember> members;
 
-        public Family(IEnumerable<object> members)
+        public Family(IEnumerable<FamilyMember> members)
         {
-            this.members = new List<object>(members);
+            this.members = new List<FamilyMember>(members);
         }
 
         public void WinterBegins()
         {
             Console.WriteLine("Winter just came...");
-            foreach(object obj in this.members)
+            foreach(FamilyMember member in this.members)
             {
-                this.GrowHair(obj);
-                this.GrowBeard(obj);
+                IHairy hairy = member.As<IHairy>();
+                if (hairy != null)
+                    hairy.GrowHair();
+
+                IBearded bearded = member.As<IBearded>();
+                if (bearded != null)
+                    bearded.GrowBeard();
             }
 
             Console.WriteLine(new string('-',20));
@@ -31,42 +36,14 @@ namespace ConsoleFamily
         public void SummerComes()
         {
             Console.WriteLine("Summer is here...");
-            foreach (object obj in this.members)
+            foreach (FamilyMember member in this.members)
             {
-                this.BeHappy(obj);
+                IEmotional emotional = member.As<IEmotional>();
+                if (emotional != null)
+                    emotional.BeHappy();
             }
 
             Console.WriteLine(new string('-', 20));
-        }
-
-        private void BeHappy(object obj)
-        {
-            IEmotional emotional = obj as IEmotional;
-            if(emotional != null)
-            {
-                Console.WriteLine("{0}: ", obj.GetType().Name);
-                emotional.BeHappy();
-            }
-        }
-
-        private void GrowBeard(object obj)
-        {
-            IBearded bearded = obj as IBearded;
-            if (bearded != null)
-            {
-                Console.WriteLine("{0}: ", obj.GetType().Name);
-                bearded.GrowBeard();
-            }
-        }
-
-        private void GrowHair(object obj)
-        {
-            IHairy hairy = obj as IHairy;
-            if (hairy != null)
-            {
-                Console.WriteLine("{0}: ", obj.GetType().Name);
-                hairy.GrowHair();
-            }
         }
     }
 }

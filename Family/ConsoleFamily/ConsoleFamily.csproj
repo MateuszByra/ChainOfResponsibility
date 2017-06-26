@@ -42,11 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Boy.cs" />
-    <Compile Include="Dad.cs" />
-    <Compile Include="Dog.cs" />
+    <Compile Include="Bearded.cs" />
+    <Compile Include="Emotional.cs" />
     <Compile Include="Family.cs" />
-    <Compile Include="Mom.cs" />
+    <Compile Include="FamilyMember.cs" />
+    <Compile Include="Hairy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
